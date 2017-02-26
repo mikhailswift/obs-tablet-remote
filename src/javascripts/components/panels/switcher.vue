@@ -1,9 +1,10 @@
 <template>
 	<div class="panel switcher" :class="classes">
-		<button v-for="scene in obs.scenes" class="scene" :class="{active: scene.name == obs.currentScene}"
+		<div v-for="scene in obs.scenes" class="scene" :class="{active: scene.name == obs.currentScene}"
 		        @click.stop.prevent="switchToScene(scene)">
-			{{scene.name}}
-		</button>
+			<div class="scene-text">{{scene.name}}</div>
+			<div v-if="scene.name == obs.currentScene" class="scene-text scene-time">99 seconds</div>
+		</div>
 	</div>
 </template>
 
