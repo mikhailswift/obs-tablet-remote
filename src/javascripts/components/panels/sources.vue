@@ -1,7 +1,12 @@
 <template>
 	<div class="panel sources-panel">
 		<div class="scene" v-if="currentScene">
-			<h3 class="scene-name" v-text="currentScene.name"></h3>
+			<!--<h3 class="scene-name" v-text="currentScene.name"></h3>-->
+			<div class="scene-name">
+				<select v-model="currentScene">
+					<option v-for="scene in this.obs.scenes" v-bind:value="scene">{{ scene.name }}</option>
+				</select>
+                        </div>
 
 			<div class="sources">
 				<button class="source"
@@ -18,14 +23,6 @@
 	import OBSUserMixin from '../../mixins/obs-user'
 
 	export default {
-		computed: {
-			currentScene() {
-				return this.obs.scenes.find(scene => {
-					return scene.name === this.obs.currentScene
-				})
-			}
-		},
-
 		methods: {
 			isCurrentScene(scene) {
 				return scene.name === this.obs.currentScene
@@ -42,7 +39,8 @@
 
 		props: {
 			obs: Object,
-			settings: Object
+			settings: Object,
+			selectedScene: Object
 		}
 	}
 </script>
