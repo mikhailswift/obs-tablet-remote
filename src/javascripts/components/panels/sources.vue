@@ -12,7 +12,7 @@
 				<button class="source"
 				        v-for="source in selectedScene.sources" :key="source.name"
 				        :class="{ active: source.render }" v-text="source.name"
-				        @click="toggleSource(selectedScene.name, source.name, !source.render)">
+				        @click="toggleSource(selectedScene, source, !source.render)">
 				</button>
 			</div>
 		</div>
@@ -23,9 +23,6 @@
 	import OBSUserMixin from '../../mixins/obs-user'
 
 	export default {
-		mounted: function() {
-		},
-
 		computed: {
 			currentScene() {
 				var scene = this.obs.scenes.find(scene => {
@@ -45,9 +42,11 @@
 			},
 
 			async toggleSource(scene, source, render) {
-				await this.$obs.setSourceRender(scene, source, render)
+				await this.$obs.setSourceRender(scene.name, source.name, render).then(function() {
+					source.render = render;
+				});
 				// No automatic update as of obs-websocket 0.3.1
-				this.$emit('force-refresh')
+				//this.$emit('force-refresh')
 			}
 		},
 
