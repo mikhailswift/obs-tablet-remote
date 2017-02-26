@@ -23,6 +23,10 @@ $switcher-active-scene-bg: $active-color;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 		word-wrap: normal;
+		display:flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items:center;
 
 		@include large {
 			font-size: 2rem;
@@ -38,12 +42,19 @@ $switcher-active-scene-bg: $active-color;
 		}
 	}
 
+	.scene-text {
+		font-family: Arial;
+		text-align: center;
+	}
+
+	.scene-time {
+		font-size: .8rem;
+		color: #7c7c7c;
+	}
+
 	@for $i from 1 through 10 {
 		&.per-row-#{$i} .scene {
 			flex-basis: 100% / $i;
 		}
 	}
-
-
-
 }
