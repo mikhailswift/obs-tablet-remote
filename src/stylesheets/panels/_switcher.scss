@@ -45,6 +45,7 @@ $switcher-active-scene-bg: $active-color;
 	.scene-text {
 		font-family: Arial;
 		text-align: center;
+		text-overflow: ellipsis;
 	}
 
 	.scene-time {

@@ -3,16 +3,16 @@
 		<div class="scene" v-if="currentScene">
 			<!--<h3 class="scene-name" v-text="currentScene.name"></h3>-->
 			<div class="scene-name">
-				<select v-model="currentScene">
+				<select class="scene-select" v-model="selectedScene">
 					<option v-for="scene in this.obs.scenes" v-bind:value="scene">{{ scene.name }}</option>
 				</select>
                         </div>
 
 			<div class="sources">
 				<button class="source"
-				        v-for="source in currentScene.sources" :key="source.name"
+				        v-for="source in selectedScene.sources" :key="source.name"
 				        :class="{ active: source.render }" v-text="source.name"
-				        @click="toggleSource(currentScene.name, source.name, !source.render)">
+				        @click="toggleSource(selectedScene.name, source.name, !source.render)">
 				</button>
 			</div>
 		</div>
@@ -23,9 +23,25 @@
 	import OBSUserMixin from '../../mixins/obs-user'
 
 	export default {
+		mounted: function() {
+		},
+
+		computed: {
+			currentScene() {
+				var scene = this.obs.scenes.find(scene => {
+					return scene.name === this.obs.currentScene
+				});
+
+				this.selectedScene = scene;
+				return scene;
+			}
+		},
+
 		methods: {
-			isCurrentScene(scene) {
-				return scene.name === this.obs.currentScene
+			getCurrentScene() {
+				return this.obs.scenes.find(scene => {
+					return scene.name === this.obs.currentScene
+				});
 			},
 
 			async toggleSource(scene, source, render) {
