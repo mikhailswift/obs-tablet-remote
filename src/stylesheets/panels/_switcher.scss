@@ -13,10 +13,14 @@ $switcher-active-scene-bg: $active-color;
 	}
 
 	.scene {
-		border: none;
+		border: 1px solid rgba(black, 0.04);
 		background-color: $switcher-scene-bg;
 		color: #000000;
-		font-size: 1.1rem;
+		font-size: 1.5rem;
+		letter-spacing: 2px;
+		font-weight: 400;
+		font-family: Oswald;
+		text-transform: uppercase;
 		min-height: 4rem;
 		outline: none;
 		overflow: hidden;
@@ -35,7 +39,7 @@ $switcher-active-scene-bg: $active-color;
 		transition: background-color 0.2s;
 
 		&:hover, &:focus {
-			background-color: darken($switcher-scene-bg, 5%);
+			background-color: darken($switcher-scene-bg, 2%);
 		}
 		&.active {
 			background-color: $switcher-active-scene-bg;
@@ -43,13 +47,16 @@ $switcher-active-scene-bg: $active-color;
 	}
 
 	.scene-text {
-		font-family: Arial;
-		text-align: center;
+		color: rgba(black, 0.5);
 	}
 
 	.scene-time {
-		font-size: .8rem;
-		color: #7c7c7c;
+		color: rgba(black, 0.3);
+		font-size: 0.9rem;
+		padding-top: 1%;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 1px;
 	}
 
 	@for $i from 1 through 10 {

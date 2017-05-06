@@ -3,7 +3,7 @@ button {
 	border: 1px solid darken($main-color, 10%);
 	color: #fafafa;
 	cursor: pointer;
-	padding: $spacing $spacing * 1.5;
+	padding: $spacing $spacing;
 
 	&[disabled] {
 		$disabled-color: mix($main-color, #dddddd, 20%);
