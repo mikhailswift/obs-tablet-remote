@@ -1,13 +1,18 @@
 <template>
 	<div class="panel sources-panel">
 		<div class="scene" v-if="currentScene">
-			<h3 class="scene-name" v-text="currentScene.name"></h3>
+			<!--<h3 class="scene-name" v-text="currentScene.name"></h3>-->
+			<div class="scene-name">
+				<select class="scene-select" v-model="selectedScene">
+					<option v-for="scene in this.obs.scenes" v-bind:value="scene">{{ scene.name }}</option>
+				</select>
+                        </div>
 
 			<div class="sources">
 				<button class="source"
-				        v-for="source in currentScene.sources" :key="source.name"
+				        v-for="source in selectedScene.sources" :key="source.name"
 				        :class="{ active: source.render }" v-text="source.name"
-				        @click="toggleSource(currentScene.name, source.name, !source.render)">
+				        @click="toggleSource(selectedScene, source, !source.render)">
 				</button>
 			</div>
 		</div>
@@ -20,21 +25,28 @@
 	export default {
 		computed: {
 			currentScene() {
-				return this.obs.scenes.find(scene => {
+				var scene = this.obs.scenes.find(scene => {
 					return scene.name === this.obs.currentScene
-				})
+				});
+
+				this.selectedScene = scene;
+				return scene;
 			}
 		},
 
 		methods: {
-			isCurrentScene(scene) {
-				return scene.name === this.obs.currentScene
+			getCurrentScene() {
+				return this.obs.scenes.find(scene => {
+					return scene.name === this.obs.currentScene
+				});
 			},
 
 			async toggleSource(scene, source, render) {
-				await this.$obs.setSourceRender(scene, source, render)
+				await this.$obs.setSourceRender(scene.name, source.name, render).then(function() {
+					source.render = render;
+				});
 				// No automatic update as of obs-websocket 0.3.1
-				this.$emit('force-refresh')
+				//this.$emit('force-refresh')
 			}
 		},
 
@@ -42,7 +54,8 @@
 
 		props: {
 			obs: Object,
-			settings: Object
+			settings: Object,
+			selectedScene: Object
 		}
 	}
 </script>

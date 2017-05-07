@@ -17,6 +17,10 @@
 			setInterval(function() {
 				scope.calculateTimeSinceSwitch();
 			}, 1000);
+
+			this.$obs.on('scenes.switch', function() {
+				scope.resetSceneSwitchedTime();
+			});
 		},
 
 		computed: {

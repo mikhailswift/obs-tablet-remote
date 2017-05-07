@@ -17,10 +17,18 @@
 		& > .scene-name {
 			flex: 0 0 auto;
 			margin: 0;
-			padding: $spacing;
 			text-align: center;
 			text-overflow: ellipsis;
 			white-space: nowrap;
+
+			& > .scene-select {
+				padding: $spacing;
+				text-align: center;
+				font-size: 1.1rem;
+				font-weight: lighter;
+				height:100%;
+				width: 100%;
+			}
 		}
 
 		& > .sources {
