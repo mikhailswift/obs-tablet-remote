@@ -32,6 +32,30 @@
 		methods: {
 			switchToScene(scene) {
 				this.resetSceneSwitchedTime();
+                                switch (scene.name) {
+                                    case "Multi - Pixel":
+                                            this.$obs.setMute('Capture Card - Pixel', false);
+                                            this.$obs.setMute('Capture Card - Scoodah', true);
+                                            this.$obs.setMute('Capture Card - Alacon', true);
+                                        break;
+                                    case "Multi - Scoodah":
+                                            this.$obs.setMute('Capture Card - Pixel', true);
+                                            this.$obs.setMute('Capture Card - Scoodah', false);
+                                            this.$obs.setMute('Capture Card - Alacon', true);
+                                        break;
+                                    case "Multi - Alacon":
+                                            this.$obs.setMute('Capture Card - Pixel', true);
+                                            this.$obs.setMute('Capture Card - Scoodah', true);
+                                            this.$obs.setMute('Capture Card - Alacon', false);
+
+                                        break;
+                                    default:
+                                            this.$obs.setMute('Capture Card - Pixel', false);
+                                            this.$obs.setMute('Capture Card - Scoodah', false);
+                                            this.$obs.setMute('Capture Card - Alacon', false);
+
+                                        break;
+                                }
 				if (this.settings.switcher.transitionScene !== "") {
 					this.$obs.setCurrentScene(this.settings.switcher.transitionScene);
 					var scope = this;
